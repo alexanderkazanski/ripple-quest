@@ -109,12 +109,13 @@ function Index() {
           const tx = (w as any).tx ?? (w as any).tx_json;
           const meta = (w as any).meta;
           if (!tx) return null;
+          const delivered = typeof meta === "object" ? (meta as any)?.delivered_amount : undefined;
           return {
-            hash: tx.hash,
+            hash: (w as any).hash ?? tx.hash,
             type: tx.TransactionType,
             account: tx.Account,
             destination: tx.Destination,
-            amount: amountToText(tx.Amount),
+            amount: amountToText(tx.Amount) ?? amountToText(delivered),
             fee: tx.Fee ? `${dropsToXrp(tx.Fee)} XRP` : undefined,
             result: typeof meta === "object" ? meta?.TransactionResult : undefined,
             date: tx.date,
