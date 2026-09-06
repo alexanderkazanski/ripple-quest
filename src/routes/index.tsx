@@ -154,8 +154,8 @@ function Index() {
           closeTime: rippleTimeToDate(l.close_time).toLocaleTimeString(),
           txCount: (l as any).transactions?.length ?? 0,
           feeBase: dropsToXrp(fee.result.drops.base_fee),
-          reserveBase: String(vl?.reserve_base_xrp ?? "—"),
-          reserveInc: String(vl?.reserve_inc_xrp ?? "—"),
+          reserveBase: vl ? dropsToXrp(vl.reserve_base) : "—",
+          reserveInc: vl ? dropsToXrp(vl.reserve_inc) : "—",
         });
 
         if (DEFAULT_ADDRESS) await loadAccount(DEFAULT_ADDRESS);
