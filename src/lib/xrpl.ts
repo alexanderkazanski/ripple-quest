@@ -20,6 +20,7 @@ export function dropsToXrp(drops: string | number): string {
   });
 }
 
-export function shortHash(h: string, n = 8): string {
+export function shortHash(h: string | undefined | null, n = 8): string {
+  if (!h) return "—";
   return h.length > n * 2 ? `${h.slice(0, n)}…${h.slice(-n)}` : h;
 }
