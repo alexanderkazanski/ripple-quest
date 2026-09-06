@@ -119,8 +119,35 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen bg-background text-foreground">
+        <header className="border-b border-border">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5">
+            <div>
+              <h1 className="text-xl font-bold tracking-tight">XRP Ledger Explorer</h1>
+              <p className="text-xs text-muted-foreground capitalize">testnet</p>
+            </div>
+            <nav className="flex items-center gap-1 text-sm">
+              <Link
+                to="/"
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "bg-accent text-foreground" }}
+                className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
+                Ledger
+              </Link>
+              <Link
+                to="/account"
+                activeProps={{ className: "bg-accent text-foreground" }}
+                className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
+                Account
+              </Link>
+            </nav>
+          </div>
+        </header>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
