@@ -219,26 +219,6 @@ function Index() {
   }, [query, loadAccount]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight">XRP Ledger Explorer</h1>
-            <p className="text-xs text-muted-foreground capitalize">{NETWORK}</p>
-          </div>
-          <span
-            className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium ${
-              connected
-                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                : "border-border bg-muted text-muted-foreground"
-            }`}
-          >
-            <span className={`size-2 rounded-full ${connected ? "bg-emerald-500 animate-pulse" : "bg-muted-foreground"}`} />
-            {connected ? "Connected" : connError ? "Error" : "Connecting…"}
-          </span>
-        </div>
-      </header>
-
       <main className="mx-auto max-w-5xl space-y-6 px-4 py-6">
         {connError && (
           <div className="rounded-lg border border-destructive/40 bg-destructive/10 p-4 text-sm text-destructive">

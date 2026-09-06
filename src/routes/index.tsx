@@ -107,9 +107,8 @@ function LedgerPage() {
           pushLedger({
             index: l.ledger_index,
             hash: l.ledger_hash,
-            closeTime: rippleTimeToDate(l.close_time).toLocaleTimeString(),
-            txCount: l.transaction_count ?? (l as any).transactions?.length ?? 0,
-            totalFees: (l as any).total_coins ? undefined : undefined,
+            closeTime: rippleTimeToDate((l as any).close_time).toLocaleTimeString(),
+            txCount: (l as any).transaction_count ?? (l as any).transactions?.length ?? 0,
           });
         }
 
