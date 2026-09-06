@@ -3,10 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 import { isValidClassicAddress, isValidXAddress } from "xrpl";
 import { getClient, NETWORK, DEFAULT_ADDRESS, dropsToXrp, shortHash } from "@/lib/xrpl";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "XRP Ledger Explorer — Testnet" },
+      { title: "Account Lookup — XRP Ledger Explorer (Testnet)" },
       {
         name: "description",
         content:
