@@ -36,12 +36,12 @@ interface TxRow {
   hash: string;
   type: string;
   account: string;
-  destination?: string;
-  amount?: string;
-  fee?: string;
-  result?: string;
-  date?: number;
-  ledger?: number;
+  destination?: string | undefined;
+  amount?: string | undefined;
+  fee?: string | undefined;
+  result?: string | undefined;
+  date?: number | undefined;
+  ledger?: number | undefined;
 }
 
 interface LedgerState {
@@ -140,6 +140,8 @@ function Index() {
         setConnected(true);
 
         const fee = await client.request({ command: "fee" });
+        const state = await client.request({ command: "server_state" });
+        const vl = state.result.state.validated_ledger;
         const ledgerRes = await client.request({
           command: "ledger",
           ledger_index: "validated",
@@ -152,8 +154,8 @@ function Index() {
           closeTime: rippleTimeToDate(l.close_time).toLocaleTimeString(),
           txCount: (l as any).transactions?.length ?? 0,
           feeBase: dropsToXrp(fee.result.drops.base_fee),
-          reserveBase: dropsToXrp(fee.result.drops.reserve_base),
-          reserveInc: dropsToXrp(fee.result.drops.reserve_inc),
+          reserveBase: String(vl?.reserve_base_xrp ?? "—"),
+          reserveInc: String(vl?.reserve_inc_xrp ?? "—"),
         });
 
         if (DEFAULT_ADDRESS) await loadAccount(DEFAULT_ADDRESS);
@@ -407,7 +409,7 @@ function Detail({
   highlight,
 }: {
   label: string;
-  value?: string;
+  value?: string | undefined;
   mono?: boolean;
   highlight?: boolean;
 }) {
